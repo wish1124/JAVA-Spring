@@ -1,10 +1,7 @@
 package com.example.practice.repository;
 
-public class PostRepository {
-    //1 save
+import com.example.practice.entity.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    //2 get
-
-    //3 delete
-
+public interface PostRepository extends JpaRepository<Post, Long> {
 }

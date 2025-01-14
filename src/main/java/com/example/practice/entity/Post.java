@@ -6,11 +6,23 @@ package com.example.practice.entity;
 // 4. createdAt
 // 5. writerId
 
+import jakarta.annotation.Generated;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@Entity
+@Getter
+@NoArgsConstructor
 public class Post {
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String text;
     private long writerId;
@@ -22,6 +34,12 @@ public class Post {
         this.text = text;
         this.writerId = writerId;
         this.createdAt = createdAt;
+    }
+
+    public Post(Post obj){
+        this.title = obj.title;
+        this.text = obj.text;
+        this.writerId = obj.writerId;
     }
 
 
