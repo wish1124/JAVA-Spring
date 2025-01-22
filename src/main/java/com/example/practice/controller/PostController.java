@@ -1,29 +1,38 @@
 package com.example.practice.controller;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import com.example.practice.entity.Post;
+import com.example.practice.domain.dto.CreatePostDto;
 import com.example.practice.service.PostService;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+// Bean, Component <- Controller, Service, Repository
+// Bean Container = IoC(Inversion of Control) Container
 @RestController
-@Getter
-@Setter
+// Wrong
+//@Getter
+//@Setter
+//@RequiredArgsConstructor
+@RequestMapping("/v1/api/post")
 public class PostController {
+
+    // 1. Constructor
     @Autowired
     private PostService postService;
 
-    @PostMapping
-    private ResponseEntity<?> createPost(@RequestBody Post post) {
-        postService.create(post);
+
+//    public PostController(PostService postService) {
+//        this.postService = postService;
+//    }
+
+
+    // Post Upload "/users"
+    @PostMapping("/posts")
+    private ResponseEntity<Void> createPost(
+            @RequestBody CreatePostDto dto
+    ) {
+
+        postService.create(dto);
         return ResponseEntity.ok().build();
     }
 }

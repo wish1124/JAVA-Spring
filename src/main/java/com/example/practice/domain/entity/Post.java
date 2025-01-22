@@ -1,4 +1,4 @@
-package com.example.practice.entity;
+package com.example.practice.domain.entity;
 
 // 1. id
 // 2. title
@@ -6,18 +6,22 @@ package com.example.practice.entity;
 // 4. createdAt
 // 5. writerId
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+
+@Builder
 @Entity
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Post {
     @Id
