@@ -1,7 +1,10 @@
 package com.example.practice.controller;
 
 import com.example.practice.domain.dto.CreatePostDto;
+import com.example.practice.domain.dto.GetPostDto;
+import com.example.practice.domain.entity.Post;
 import com.example.practice.service.PostService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 // Bean, Component <- Controller, Service, Repository
 // Bean Container = IoC(Inversion of Control) Container
 @RestController
-// Wrong
-//@Getter
-//@Setter
-//@RequiredArgsConstructor
-@RequestMapping("/v1/api/post")
+@Slf4j
+@RequestMapping("/v1/api/posts")
 public class PostController {
 
     // 1. Constructor
@@ -21,18 +21,24 @@ public class PostController {
     private PostService postService;
 
 
-//    public PostController(PostService postService) {
-//        this.postService = postService;
-//    }
-
-
-    // Post Upload "/users"
-    @PostMapping("/posts")
-    private ResponseEntity<Void> createPost(
-            @RequestBody CreatePostDto dto
-    ) {
+    @PostMapping
+    public ResponseEntity<Void> createPost(@RequestBody CreatePostDto dto) {
 
         postService.create(dto);
+
         return ResponseEntity.ok().build();
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetPostDto> getPost(@PathVariable Long id) {
+
+//        Type name = postService.getPost(id);
+
+        GetPostDto post = postService.getPost(id);
+
+        return ResponseEntity.ok().body(post);
+    }
+
+
 }
